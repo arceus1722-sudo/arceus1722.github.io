@@ -4,448 +4,335 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Prateek Pachauri — Portfolio</title>
-  <meta name="description" content="Prateek Pachauri — International Relations & World Politics portfolio" />
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Fonts: mix of serif + modern sans for sections -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@300;400;600&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    /* ========== Root theme variables ========== */
     :root{
-      --accent: #c9864f;
+      --accent: #d8a05a;
       --glass: rgba(255,255,255,0.06);
-      --glass-strong: rgba(255,255,255,0.10);
-      --text-light: rgba(250,250,250,0.94);
-      --text-dark: #0b1220;
-      --bg-dark: #071026;
-      --bg-light: #f7f7f8;
-      --transition-fast: 220ms;
+      --bg-dark: #07101a;
+      --bg-light: #f6f6f7;
+      --text-dark: #071018;
+      --trans: 240ms;
       --card-radius: 18px;
-      --max-width: 1200px;
+      --max-w:1150px;
+    }
+    html,body{height:100%; margin:0; font-family:Inter,system-ui,Arial; -webkit-font-smoothing:antialiased}
+    body{background:var(--bg-dark); color: #eee; overflow-x:hidden}
+
+    /* Background video */
+    .bg {
+      position:fixed; inset:0; z-index:-20; overflow:hidden; pointer-events:none;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .bg video{
+      width:130%; height:130%; object-fit:cover; transform:translate(-6%,-4%);
+      filter:brightness(.55) saturate(.95);
+    }
+    .overlay{ position:fixed; inset:0; background: linear-gradient(180deg, rgba(2,6,10,0.15), rgba(2,6,10,0.55)); z-index:-10 }
+
+    /* Page container */
+    .wrap{ max-width:var(--max-w); margin:0 auto; padding:38px 22px; }
+
+    /* Top nav */
+    header{ display:flex; justify-content:space-between; align-items:center; gap:20px;}
+    .nav a{ color:rgba(255,255,255,0.9); text-decoration:none; margin-left:18px; font-weight:600; font-size:14px; letter-spacing:.6px}
+    .toggle{
+      background:rgba(255,255,255,0.06); padding:8px 10px; border-radius:999px; cursor:pointer; border:0;
     }
 
-    /* ========== Base / reset ========== */
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      color:var(--text-light);
-      background:var(--bg-dark);
-      overflow-x:hidden;
-    }
-
-    a{color:var(--accent); text-decoration:none}
-    img{max-width:100%; display:block}
-
-    /* ========== background video ========== */
-    .bg-wrap{
-      position:fixed;
-      inset:0;
-      z-index:-2;
-      overflow:hidden;
-      pointer-events:none;
-    }
-    .bg-wrap video{
-      width:130%;
-      height:130%;
-      object-fit:cover;
-      transform:translate(-8%, -6%) scale(1.04);
-      filter:brightness(.55) saturate(.98);
-    }
-    /* optional subtle gradient overlay */
-    .bg-overlay{
-      position:fixed; inset:0; z-index:-1;
-      background: linear-gradient(180deg, rgba(6,12,22,0.25), rgba(2,6,10,0.6));
-      pointer-events:none;
-    }
-
-    /* ========== page container ========== */
-    .page{
-      max-width:var(--max-width);
-      margin:0 auto;
-      padding:48px 28px;
-    }
-    header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      margin-bottom:36px;
-    }
-
-    .brand{
-      font-family:Playfair Display,serif;
-      font-weight:700;
-      font-size:22px;
-      letter-spacing:0.4px;
-    }
-
-    .nav{
-      display:flex;
-      gap:18px;
-      align-items:center;
-    }
-    .nav a{color:rgba(255,255,255,0.85); font-weight:600; font-size:14px}
-    .mode-btn{
-      border-radius:999px;
-      padding:8px 10px;
-      background:rgba(255,255,255,0.04);
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-    }
-
-    /* ========== hero ========== */
+    /* HERO (centered name & photo primary) */
     .hero{
-      display:flex;
-      gap:40px;
-      align-items:flex-start;
-      margin-top:20px;
-      margin-bottom:60px;
+      display:flex; align-items:center; justify-content:center; text-align:center; flex-direction:column;
+      gap:20px; margin-top:40px; margin-bottom:36px;
     }
 
-    .hero-left{flex:1; min-width:280px}
-    .kicker{color:var(--accent); letter-spacing:2px; text-transform:uppercase; font-weight:600; font-size:12px; margin-bottom:14px}
-    h1{
-      font-family:Playfair Display,serif;
-      font-size:48px;
-      line-height:1.02;
-      margin:0 0 16px 0;
-      color:var(--text-light);
-      text-shadow:0 6px 28px rgba(0,0,0,0.4);
-    }
-    p.lead{max-width:760px; color:rgba(255,255,255,0.9); margin:0 0 18px 0; font-size:18px}
-
-    .hero-right{
-      width:420px;
-      max-width:40%;
-      min-width:260px;
-    }
-
-    /* profile card */
-    .profile-card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-      backdrop-filter: blur(8px);
-      padding:26px;
-      border-radius:var(--card-radius);
-      box-shadow: 0 20px 40px rgba(2,4,10,0.6);
-      transition:transform var(--transition-fast), box-shadow var(--transition-fast);
-      display:flex;
-      gap:18px;
-      align-items:center;
-    }
-    .profile-card:hover{ transform:translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.6) }
+    /* avatar primary */
     .avatar{
-      width:120px; height:120px; border-radius:18px; overflow:hidden; flex-shrink:0;
-      border:6px solid rgba(255,255,255,0.06);
+      width:200px; height:200px; border-radius:999px; overflow:hidden;
+      border:6px solid rgba(255,255,255,0.07); box-shadow: 0 18px 40px rgba(2,6,10,0.7);
+      transition:transform var(--trans), box-shadow var(--trans);
+      background:linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
     }
-    .avatar img{width:100%; height:100%; object-fit:cover; display:block}
+    .avatar img{ width:100%; height:100%; object-fit:cover; display:block }
+    .avatar:hover{ transform:translateY(-8px) scale(1.02); box-shadow:0 36px 80px rgba(0,0,0,0.6) }
 
-    .profile-meta h3{ margin:0 0 6px 0; font-size:20px; color:var(--text-light) }
-    .profile-meta small{ color:rgba(255,255,255,0.78) }
-
-    /* ========== publications block ========== */
-    .pubs{
-      margin:72px 0;
-      text-align:center;
-    }
-    .pubs h2{
-      font-family:Playfair Display,serif;
-      font-size:40px;
-      margin-bottom:28px;
-    }
-    .cards{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:22px;
-    }
-    .card{
-      padding:26px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-      border-radius:16px;
-      backdrop-filter: blur(8px);
-      transition: transform 320ms ease, box-shadow 320ms ease, border 220ms;
-      cursor:pointer;
-      border:1px solid rgba(255,255,255,0.03);
-      min-height:160px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-    }
-    .card:hover{
-      transform:translateY(-10px) scale(1.01);
-      box-shadow: 0 28px 60px rgba(2,6,15,0.65);
-      border:1px solid rgba(255,255,255,0.08);
-    }
-    .card .title{ font-weight:700; font-size:18px; color:var(--text-light)}
-    .card .desc{ color:rgba(255,255,255,0.8); margin-top:10px; flex:1 }
-    .card .link{ margin-top:14px; font-weight:600; color:var(--accent) }
-
-    /* ========== contact / footer ========== */
-    footer{
-      margin:60px 0 140px;
-      text-align:center;
-      color:rgba(255,255,255,0.75);
-    }
-
-    /* ========== hover effects on text (special) ========== */
-    .hover-underline{
-      position:relative;
+    /* Big name - different fonts & letter styling */
+    .name{
+      margin-top:10px;
+      font-family:Fraunces, 'Playfair Display', serif;
+      font-weight:700;
+      font-size:56px;
+      letter-spacing: -1px;
+      line-height:0.95;
+      color:var(--text);
       display:inline-block;
-      color:inherit;
-      transition:color 200ms;
-    }
-    .hover-underline::after{
-      content:"";
-      position:absolute;
-      height:3px;
-      left:0; right:0; bottom:-6px;
-      background:linear-gradient(90deg,var(--accent), rgba(200,140,80,0.7));
-      transform:scaleX(0);
-      transform-origin:left;
-      transition:transform 260ms ease;
-      border-radius:3px;
-    }
-    .hover-underline:hover::after{ transform:scaleX(1) }
-    .hover-underline:hover{ color:var(--accent) }
-
-    /* ========== photo hover effect ========== */
-    .photo-zoom{
-      transition: transform 420ms cubic-bezier(.2,.9,.3,1), filter 420ms;
-      border-radius:12px;
-      overflow:hidden;
-    }
-    .photo-zoom img{ display:block; width:100%; height:100%; object-fit:cover }
-    .photo-zoom:hover{ transform:scale(1.04); filter:grayscale(.12) saturate(1.05) }
-
-    /* ========== custom circular cursor ========== */
-    .cursor {
-      position: fixed;
-      pointer-events: none;
-      width:36px; height:36px;
-      border-radius:50%;
-      transform:translate(-50%,-50%) scale(1);
-      border:2px solid rgba(255,255,255,0.9);
-      background:radial-gradient(circle at 40% 35%, rgba(255,255,255,0.18), rgba(255,255,255,0.02));
-      mix-blend-mode:screen;
-      transition: width 160ms ease, height 160ms ease, transform 120ms ease, background 220ms;
-      z-index:9999;
-      display:block;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.35);
-      opacity:0.95;
-    }
-    .cursor.big{ width:64px; height:64px; border-width:3px; background: rgba(255,255,255,0.06) }
-
-    /* enlarge cursor on interactive elements */
-    a:hover ~ .cursor, button:hover ~ .cursor, .card:hover ~ .cursor, .mode-btn:hover ~ .cursor {
-      transform:translate(-50%,-50%) scale(1.06);
+      position:relative;
+      transition:all var(--trans);
+      text-shadow: 0 10px 40px rgba(0,0,0,0.55);
     }
 
-    /* ========== dark/light switching - uses data-theme attribute ========== */
-    :root[data-theme="light"]{
-      --accent:#4b2f1e;
-      --glass: rgba(8,10,12,0.03);
-      --text-light: #121213;
-      --bg-dark: #f6f6f7;
-      --bg-light: #fff;
-    }
-    /* for light theme invert video brightness so text remains readable */
-    :root[data-theme="light"] .bg-wrap video{ filter:brightness(0.9) saturate(1.0) contrast(.9) }
-    :root[data-theme="light"] .profile-card,
-    :root[data-theme="light"] .card {
-      background:linear-gradient(180deg, rgba(10,10,10,0.02), rgba(10,10,10,0.01));
-      color:var(--text-dark);
-    }
-    :root[data-theme="light"] body { color:var(--text-dark) }
-
-    /* ========== small screens ========== */
-    @media (max-width:880px){
-      .hero{ flex-direction:column; }
-      .hero-right{ width:100% }
-      h1{ font-size:36px }
-      .cursor{ display:none } /* hide on mobile */
+    /* small subtitle / brief info */
+    .subtitle{
+      font-family:Space Grotesk, Inter, sans-serif;
+      font-size:16px;
+      color:rgba(255,255,255,0.88);
+      margin-top:12px;
+      max-width:850px;
     }
 
+    .meta{
+      margin-top:6px;
+      color:rgba(255,255,255,0.78);
+      font-weight:600;
+    }
+
+    /* special name parts: wrap letters so we can swap */
+    .name .letter { display:inline-block; transition:transform 220ms, color 220ms; }
+    .name .swap { font-family: 'Space Grotesk', sans-serif; font-weight:700; display:inline-block; padding:0 6px; }
+
+    /* effect when hovering the name container */
+    .name-wrap:hover .name{ transform:translateY(-6px) scale(1.02) }
+    .name-wrap:hover .swap{ color:var(--accent); transform: rotate(-6deg) scale(1.06) }
+
+    /* Publications / content blocks */
+    section { padding:36px 0 }
+    h2.section-title{ font-family:Playfair Display, serif; font-size:34px; margin:28px 0; text-align:center; color:var(--text) }
+
+    .cards{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; margin-top:16px }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius:14px;
+      padding:22px;
+      backdrop-filter: blur(8px);
+      transition: transform .32s cubic-bezier(.2,.9,.3,1), box-shadow .32s;
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,0.04);
+    }
+    .card:hover{ transform:translateY(-10px); box-shadow:0 30px 60px rgba(2,6,12,0.6) }
+
+    .card .title{ font-family:Fraunces, serif; font-weight:700; font-size:18px; color:var(--text); margin-bottom:8px }
+    .card .desc{ color:rgba(255,255,255,0.86); font-size:14px }
+
+    /* contact / footer */
+    footer{ padding:40px 0; text-align:center; color:rgba(255,255,255,0.75) }
+
+    /* Circular custom cursor */
+    .cursor{ position:fixed; width:36px; height:36px; border-radius:50%; transform:translate(-50%,-50%); z-index:9999; pointer-events:none; border:2px solid rgba(255,255,255,0.95); background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.12), rgba(255,255,255,0.02)); transition:0.12s linear; mix-blend-mode:screen; box-shadow:0 8px 30px rgba(0,0,0,0.35) }
+    .cursor.big{ width:68px; height:68px; border-width:3px; background: rgba(255,255,255,0.06) }
+
+    /* Dark/light mode switching (data-theme attribute on html) */
+    :root[data-theme="light"]{ --accent:#8b5c3a; --bg-dark:var(--bg-light); --text:#14202a; }
+    :root[data-theme="light"] body{ background:var(--bg-light); color:var(--text-dark) }
+    :root[data-theme="light"] .card{ background:linear-gradient(180deg, rgba(0,0,0,0.03), rgba(0,0,0,0.01)); color:var(--text-dark) }
+    :root[data-theme="light"] .name{ color:var(--text-dark); text-shadow:none }
+    :root[data-theme="light"] .avatar{ border:6px solid rgba(0,0,0,0.06) }
+
+    /* responsive */
+    @media (max-width:780px){
+      .name{ font-size:36px }
+      .avatar{ width:150px; height:150px }
+      .cursor{ display:none }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Background video (file must be at repo root -> background.mp4) -->
-  <div class="bg-wrap" aria-hidden="true">
-    <video autoplay muted loop playsinline preload="auto" id="bgvid">
+  <!-- Background video -->
+  <div class="bg" aria-hidden="true">
+    <video id="bgvid" autoplay muted loop playsinline preload="auto">
       <source src="background.mp4" type="video/mp4">
-      <!-- fallback static image if video fails -->
+      <!-- fallback image could be added here -->
     </video>
   </div>
-  <div class="bg-overlay" aria-hidden="true"></div>
+  <div class="overlay" aria-hidden="true"></div>
 
   <!-- Custom cursor -->
   <div class="cursor" id="cursor"></div>
 
-  <div class="page">
+  <div class="wrap">
     <header>
-      <div class="brand">Prateek Pachauri</div>
-      <nav class="nav">
+      <div style="font-family:Fraunces, Playfair Display, serif; font-size:18px; color:rgba(255,255,255,0.95)">Portfolio — History & World Politics</div>
+      <nav>
         <a href="#about">About</a>
         <a href="#publications">Publications</a>
-        <a href="#blog">Blog</a>
         <a href="#contact">Contact</a>
-        <button class="mode-btn" id="themeToggle" aria-label="Toggle theme">🌙</button>
+        <button class="toggle" id="themeBtn" aria-label="Toggle theme">🌙</button>
       </nav>
     </header>
 
-    <main>
-      <section class="hero">
-        <div class="hero-left">
-          <div class="kicker">Portfolio — History & World Politics</div>
-          <h1>History → Political Figures → Diplomacy → Strategy</h1>
-          <p class="lead">I study world politics, strategic thinking and the intersection of history and diplomacy. This portfolio showcases my research, writings and visual work.</p>
+    <!-- Hero: centered name & photo primary -->
+    <section class="hero">
+      <div class="avatar" title="Prateek Pachauri">
+        <img src="me/me.jpeg" alt="Prateek Pachauri portrait">
+      </div>
 
-          <p>
-            <a class="hover-underline" href="https://ijisem.com/journal/index.php/ijisem/search/index?query=Prateek+Pachauri&dateFromYear=&dateFromMonth=&dateFromDay=&dateToYear=&dateToMonth=&dateToDay=&authors=" target="_blank" rel="noopener">Publications at IJISEM →</a>
-          </p>
+      <div class="name-wrap" style="margin-top:10px;">
+        <!-- We wrap specific letters so JS can swap them on hover -->
+        <div class="name" id="name">
+          <span class="letter">P</span>
+          <span class="letter">r</span>
+          <span class="letter">a</span>
+          <span class="letter swap" id="swap-T">t</span>
+          <span class="letter">e</span>
+          <span class="letter">e</span>
+          <span class="letter">k</span>
+          &nbsp;
+          <span class="letter">P</span>
+          <span class="letter">a</span>
+          <span class="letter">c</span>
+          <span class="letter">h</span>
+          <span class="letter">a</span>
+          <span class="letter swap" id="swap-i">u</span>
+          <span class="letter">r</span>
+          <span class="letter">i</span>
+        </div>
+      </div>
+
+      <div class="subtitle">
+        <div class="meta">Bachelor — Tomsk State University · Faculty of History & Political Science · Course: International Relations & World Politics</div>
+        <div style="margin-top:10px; max-width:760px; margin-left:auto; margin-right:auto;">
+          <p style="margin:6px 0 0; color:rgba(255,255,255,0.87)">A short introduction: I investigate geopolitics, strategic thinking, historical narratives, and the interplay of psychology with diplomacy. Research, publications and commentary are showcased below.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Publications -->
+    <section id="publications">
+      <h2 class="section-title">Publications & Research</h2>
+      <div class="cards">
+        <div class="card" onclick="window.open('https://ijisem.com/journal/index.php/ijisem/search/index?query=Prateek+Pachauri','_blank')">
+          <div class="title">How the Aryan invasion myth was engineered</div>
+          <div class="desc">A study of the construction and dissemination of the Aryan invasion narrative.</div>
         </div>
 
-        <aside class="hero-right">
-          <div class="profile-card">
-            <div class="avatar photo-zoom">
-              <img src="me/me.jpeg" alt="Prateek Pachauri — portrait">
-            </div>
-            <div class="profile-meta">
-              <h3>Prateek Pachauri</h3>
-              <div><small>Bachelor degree student — Tomsk State University</small></div>
-              <div style="margin-top:6px"><small>Faculty of History & Political Science — International Relations and World Politics</small></div>
-              <div style="margin-top:12px"><a href="#blog" class="hover-underline">MetaSense Blog →</a></div>
-            </div>
-          </div>
-        </aside>
-      </section>
-
-      <!-- Publications block -->
-      <section id="publications" class="pubs">
-        <h2>Publications</h2>
-        <div class="cards">
-          <article class="card" onclick="window.open('https://ijisem.com/journal/index.php/ijisem/search/index?query=How+the+Aryan+invasion+myth+was+engineered','_blank')">
-            <div class="title">How the Aryan invasion myth was engineered</div>
-            <div class="desc">A critical analysis of the formation and dissemination of the Aryan invasion narrative.</div>
-            <div class="link">Read Article →</div>
-          </article>
-
-          <article class="card" onclick="window.open('https://ijisem.com/journal/index.php/ijisem/search/index?query=LAOS,VIETNAM,CAMBODIA','_blank')">
-            <div class="title">LAOS, VIETNAM, CAMBODIA — Indo-China Struggle</div>
-            <div class="desc">Laos, Vietnam, Cambodia — The Freedom Struggle of Indo-China.</div>
-            <div class="link">Read Article →</div>
-          </article>
-
-          <article class="card" onclick="window.open('https://ijisem.com/journal/index.php/ijisem/search/index?query=Majapahit+Empire','_blank')">
-            <div class="title">Majapahit Empire: The Peak of Indonesian Civilization</div>
-            <div class="desc">An exploration of political and cultural zenith of Majapahit and its regional influence.</div>
-            <div class="link">Read Article →</div>
-          </article>
-        </div>
-      </section>
-
-      <!-- About and contact -->
-      <section id="about" style="margin-top:60px">
-        <h2 style="font-family:Playfair Display,serif; font-size:30px; color:var(--text-light)">About</h2>
-        <p style="max-width:900px; color:rgba(255,255,255,0.9)">
-          I am <strong>Prateek Pachauri</strong>, focused on research and analysis of world politics, historical narratives and diplomatic strategy. I write about public diplomacy, information warfare, and the overlap of psychology and geopolitics.
-        </p>
-      </section>
-
-      <section id="contact" style="margin-top:40px; display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap">
-        <div style="flex:1; min-width:260px;">
-          <div class="card" style="padding:20px; border-radius:14px">
-            <div><strong>Contact</strong></div>
-            <div style="margin-top:8px">Email: <a href="mailto:arceus1722@gmail.com">arceus1722@gmail.com</a></div>
-            <div>Phone: +7 905 990 5464</div>
-            <div style="margin-top:6px">X: <a href="https://x.com/rusprateek77" target="_blank">@rusprateek77</a></div>
-            <div style="margin-top:6px">Telegram: <a href="https://t.me/Prateek47" target="_blank">Prateek47</a></div>
-            <div style="margin-top:6px">VK: <a href="https://vk.com/steelrats77" target="_blank">/steelrats77</a></div>
-            <div style="margin-top:6px">hh.ru: <a href="https://hh.ru/profile/me?hhtmFrom=ProfileActivator" target="_blank">My profile</a></div>
-          </div>
+        <div class="card" onclick="window.open('https://ijisem.com/journal/index.php/ijisem/search/index?query=LAOS,VIETNAM,CAMBODIA','_blank')">
+          <div class="title">LAOS, VIETNAM, CAMBODIA — The Freedom Struggle</div>
+          <div class="desc">Exploring anti-colonial movements in Indo-China.</div>
         </div>
 
-        <div style="flex:1; min-width:260px">
-          <div class="card" style="padding:20px; border-radius:14px">
-            <strong>Skills & Interests</strong>
-            <ul style="margin:10px 0 0 18px; color:rgba(255,255,255,0.9)">
-              <li>World politics & critical strategic thinking</li>
-              <li>Academic and research writing</li>
-              <li>Public diplomacy, information warfare, intelligence studies</li>
-              <li>Indo-Aryan linguistics & ancient Russian history</li>
-            </ul>
-          </div>
+        <div class="card" onclick="window.open('https://ijisem.com/journal/index.php/ijisem/search/index?query=Majapahit+Empire','_blank')">
+          <div class="title">Majapahit Empire: The Peak of Indonesian Civilization</div>
+          <div class="desc">Political and cultural analysis of Majapahit period.</div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <footer>
-        <div>© <strong>Prateek Pachauri</strong> — Tomsk State University</div>
-        <div style="margin-top:8px"><small>Publications at IJISEM • MetaSense blog</small></div>
-      </footer>
-    </main>
+    <!-- ABOUT and CONTACT -->
+    <section id="about">
+      <h2 class="section-title">About</h2>
+      <div style="max-width:900px; margin:0 auto; color:rgba(255,255,255,0.88); font-size:15px;">
+        <p>I am <strong>Prateek Pachauri</strong>, focused on research and analysis of world politics, historical narratives and diplomatic strategy. I write about public diplomacy, information warfare, and the overlap of psychology and geopolitics.</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-top:12px">
+        <div class="card" style="min-width:260px; max-width:420px;">
+          <div style="font-weight:700; margin-bottom:8px">Get in touch</div>
+          <div>Email: <a href="mailto:arceus1722@gmail.com" style="color:var(--accent)">arceus1722@gmail.com</a></div>
+          <div style="margin-top:8px">Phone: +7 905 990 5464</div>
+          <div style="margin-top:8px">X: <a href="https://x.com/rusprateek77" target="_blank" style="color:var(--accent)">@rusprateek77</a></div>
+          <div style="margin-top:8px">Telegram: <a href="https://t.me/Prateek47" target="_blank" style="color:var(--accent)">Prateek47</a></div>
+          <div style="margin-top:8px">VK: <a href="https://vk.com/steelrats77" target="_blank" style="color:var(--accent)">steelrats77</a></div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© Prateek Pachauri — Tomsk State University</div>
+    </footer>
+
   </div>
 
   <script>
-    /* ---------- Custom cursor ---------- */
+    /* ---------------- custom cursor ---------------- */
     (function(){
       const cursor = document.getElementById('cursor');
-      let mouseX = 0, mouseY = 0;
+      let x=window.innerWidth/2, y=window.innerHeight/2;
       document.addEventListener('mousemove', e=>{
-        mouseX = e.clientX; mouseY = e.clientY;
-        cursor.style.left = mouseX + 'px';
-        cursor.style.top = mouseY + 'px';
+        x=e.clientX; y=e.clientY;
+        cursor.style.left = x + 'px';
+        cursor.style.top  = y + 'px';
       });
 
-      // enlarge cursor when hovering interactive elements
-      const interactors = 'a, button, .card, .mode-btn';
-      document.querySelectorAll(interactors).forEach(el=>{
+      // enlarge when hovering interactive
+      const interactive = 'a, button, .card, .avatar, .name';
+      document.querySelectorAll(interactive).forEach(el=>{
         el.addEventListener('mouseenter', ()=> cursor.classList.add('big'));
         el.addEventListener('mouseleave', ()=> cursor.classList.remove('big'));
       });
 
-      // hide system cursor (desktop only)
+      // hide native cursor
       document.documentElement.style.cursor = 'none';
     })();
 
-    /* ---------- Theme toggle ---------- */
+    /* ---------------- theme toggle ---------------- */
     (function(){
-      const toggle = document.getElementById('themeToggle');
+      const btn = document.getElementById('themeBtn');
       const root = document.documentElement;
+      // restore stored
+      if(localStorage.getItem('theme') === 'light'){ root.setAttribute('data-theme','light'); btn.textContent='☀️' }
+      else btn.textContent='🌙';
 
-      // restore last theme
-      const saved = localStorage.getItem('theme');
-      if(saved === 'light') root.setAttribute('data-theme','light');
-
-      toggle.addEventListener('click', ()=>{
+      btn.addEventListener('click', ()=>{
         if(root.getAttribute('data-theme') === 'light'){
-          root.removeAttribute('data-theme');
-          localStorage.removeItem('theme');
-          toggle.textContent = '🌙';
+          root.removeAttribute('data-theme'); localStorage.removeItem('theme'); btn.textContent='🌙';
         } else {
-          root.setAttribute('data-theme','light');
-          localStorage.setItem('theme','light');
-          toggle.textContent = '☀️';
+          root.setAttribute('data-theme','light'); localStorage.setItem('theme','light'); btn.textContent='☀️';
         }
       });
-
-      // set initial label
-      toggle.textContent = root.getAttribute('data-theme') === 'light' ? '☀️' : '🌙';
     })();
 
-    /* ---------- Pause video on low power / mobile ---------- */
+    /* ---------------- name hover: swap letters with chess glyphs ----------------
+       - We specifically replace the 't' (in Prateek) with a king symbol on hover
+       - We replace the 'i' (representationally) with a pawn symbol on hover
+       - We revert when leaving.
+    */
+    (function(){
+      const swapT = document.getElementById('swap-T');
+      const swapI = document.getElementById('swap-i');
+
+      // store originals
+      const origT = swapT.textContent;
+      const origI = swapI.textContent;
+
+      const nameWrap = document.querySelector('.name-wrap');
+
+      nameWrap.addEventListener('mouseenter', ()=>{
+        // change to chess pieces and font tweak
+        swapT.textContent = '♔'; // king
+        swapT.style.fontFamily = "Playfair Display, serif";
+        swapT.style.fontSize = '0.9em';
+        swapT.style.transform = 'translateY(-2px)';
+
+        swapI.textContent = '♟'; // pawn
+        swapI.style.fontFamily = "Fraunces, serif";
+        swapI.style.fontSize = '0.9em';
+        swapI.style.transform = 'translateY(2px)';
+      });
+      nameWrap.addEventListener('mouseleave', ()=>{
+        swapT.textContent = origT;
+        swapT.style.fontFamily = '';
+        swapT.style.fontSize = '';
+        swapT.style.transform = '';
+
+        swapI.textContent = origI;
+        swapI.style.fontFamily = '';
+        swapI.style.fontSize = '';
+        swapI.style.transform = '';
+      });
+    })();
+
+    /* ---------------- video pause on small screens / reduced motion ---------------- */
     (function(){
       const v = document.getElementById('bgvid');
-      if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-        v.pause();
-      }
-      // small screens -> pause
+      if(!v) return;
+      if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) v.pause();
       if(window.innerWidth < 720) v.pause();
-      // optional: resume when user asks/clicks (not implemented)
     })();
   </script>
 </body>
