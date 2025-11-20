@@ -1,335 +1,201 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Prateek Pachauri — Portfolio</title>
-  <meta name="description" content="Prateek Pachauri — International Relations & World Politics portfolio">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prateek Pachauri — Portfolio</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-  <style>
-    /* -------------------
-       Variables & reset
-       ------------------- */
-    :root{
-      --accent: #7c3aed;
-      --bg-dark: #071026;
-      --bg-light: #f6f8fb;
-      --card-glass: rgba(255,255,255,0.04);
-      --muted-light: rgba(230,238,248,0.96);
-      --muted-dark: rgba(12,18,34,0.95);
-      --radius: 14px;
-      --ease: cubic-bezier(.2,.9,.2,1);
-      --max-width: 1150px;
-    }
+<style>
+/* ---------- ROOT THEME COLORS ---------- */
+:root {
+    --text-light: #e8e8ff;
+    --text-dark: #101018;
+    --bg-dark: #050518;
+    --bg-light: #f5f5ff;
+    --accent: #8cb5ff;
+}
 
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;background:var(--bg-dark);color:var(--muted-light);-webkit-font-smoothing:antialiased}
-    body.light{background:var(--bg-light);color:var(--muted-dark)}
+/* ---------- GLOBAL STYLES ---------- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-light);
+    transition: 0.4s ease;
+}
 
-    a{color:inherit}
-    img{max-width:100%;display:block}
+/* ---------- BACKGROUND VIDEO ---------- */
+#bg-video {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -10;
+    opacity: 0.22;
+}
 
-    /* -------------------
-       Background video
-       ------------------- */
-    #bgVideo{
-      position:fixed;inset:0;width:100vw;height:100vh;object-fit:cover;z-index:-3;pointer-events:none;opacity:0;transition:opacity .45s var(--ease);
-      filter:contrast(1.02) saturate(.98);
-    }
-    #videoFallback{
-      position:fixed;inset:0;width:100vw;height:100vh;object-fit:cover;z-index:-3;pointer-events:none;display:none;
-    }
-    .video-overlay{
-      position:fixed;inset:0;z-index:-2;pointer-events:none;
-      background:linear-gradient(180deg, rgba(2,6,23,0.26), rgba(2,6,23,0.58));
-      transition:background .45s var(--ease);
-    }
-    body.light .video-overlay{ background:linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.36)); }
+/* ---------- CONTAINER ---------- */
+.container {
+    max-width: 950px;
+    margin: 70px auto;
+    padding: 20px;
+}
 
-    /* -------------------
-       Layout
-       ------------------- */
-    .site{min-height:100vh;position:relative;overflow-x:hidden}
-    .wrap{max-width:var(--max-width);margin:0 auto;padding:36px;position:relative;z-index:6}
+/* ---------- HEADINGS ---------- */
+h1, h2 {
+    margin: 0;
+    padding: 0;
+    letter-spacing: -1px;
+    transition: 0.3s;
+}
 
-    .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
-    .brand{font-weight:700;letter-spacing:.2px}
-    .controls{display:flex;gap:8px;align-items:center}
+h1:hover, h2:hover {
+    color: var(--accent);
+    transform: translateX(5px);
+}
 
-    .btn{background:rgba(255,255,255,0.04);border:0;padding:8px 12px;border-radius:999px;color:inherit;cursor:pointer;transition:transform .18s,var(--ease);font-weight:600}
-    .btn:hover{transform:translateY(-3px)}
+/* ---------- PARAGRAPH ---------- */
+p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
 
-    /* -------------------
-       Hero area
-       ------------------- */
-    .hero{display:flex;gap:36px;align-items:center;padding:36px 0}
-    .intro{flex:1;max-width:68ch}
-    .kicker{font-family:Inter;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
-    h1.title{font-family:Playfair Display,serif;font-size:clamp(30px,5vw,48px);margin:6px 0;font-weight:700;line-height:1.02;color:var(--muted-light);transition:transform .32s var(--ease),text-shadow .32s var(--ease);cursor:default}
-    h1.title:hover{transform:translateY(-6px);text-shadow:0 18px 50px rgba(0,0,0,0.55)}
-    p.lead{margin-top:12px;color:rgba(230,238,248,0.92);font-size:16px;line-height:1.6}
+/* ---------- LINKS ---------- */
+a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+}
 
-    a.link{display:inline-block;text-decoration:underline;margin-top:12px;transition:transform .18s,color .18s}
-    a.link:hover{color:var(--accent);transform:translateY(-3px)}
+a:hover {
+    text-shadow: 0 0 8px var(--accent);
+}
 
-    /* -------------------
-       Profile card & photo
-       ------------------- */
-    .profile{width:320px;padding:16px;border-radius:var(--radius);background:var(--card-glass);backdrop-filter:blur(8px);box-shadow:0 18px 60px rgba(0,0,0,0.45);transition:transform .35s var(--ease)}
-    body.light .profile{background:#fff;border:1px solid rgba(12,18,40,0.04);box-shadow:0 8px 30px rgba(12,18,40,0.06);color:var(--muted-dark)}
-    .profile:hover{transform:translateY(-6px)}
-    .me-wrap{position:relative;border-radius:10px;overflow:hidden;height:260px}
-    .me-photo{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease),filter .35s}
-    .me-wrap:hover .me-photo{transform:scale(1.06) rotate(-0.6deg);filter:brightness(1.02) saturate(1.06)}
-    .photo-caption{position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,0.45);color:white;padding:6px 10px;border-radius:999px;font-size:13px;backdrop-filter:blur(4px)}
+/* ---------- PHOTO CARD ---------- */
+.photo-card {
+    width: 330px;
+    padding: 22px;
+    background: rgba(15, 15, 25, 0.7);
+    border-radius: 18px;
+    backdrop-filter: blur(6px);
+    transition: 0.3s;
+}
 
-    /* gallery crossfade (stacked images) */
-    .gallery img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.02);transition:opacity .9s ease,transform .9s ease}
-    .gallery img.show{opacity:1;transform:scale(1)}
+.photo-card:hover {
+    transform: translateY(-7px);
+}
 
-    /* -------------------
-       Sections and cards
-       ------------------- */
-    section{padding:36px 0}
-    h2{font-family:Playfair Display,serif;font-size:22px;margin:0 0 18px 0}
-    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-    .card{padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 28px rgba(0,0,0,0.08)}
+/* ---------- PROFILE IMAGE ---------- */
+.profile-img {
+    width: 100%;
+    border-radius: 12px;
+    transition: 0.4s ease-in-out;
+}
 
-    /* chessboard preview small */
-    .chess-board{max-width:560px;margin:18px auto;border-radius:10px;overflow:hidden;box-shadow:0 12px 36px rgba(0,0,0,0.22)}
-    .board-grid{display:grid;grid-template-columns:repeat(8,1fr)}
-    .square{padding-top:12.5%;position:relative}
-    .square-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.profile-img:hover {
+    transform: scale(1.05);
+}
 
-    /* -------------------
-       Hover focus outlines & accessible interactions
-       ------------------- */
-    a:focus, button:focus{outline:3px solid rgba(124,58,237,0.16);outline-offset:4px;border-radius:6px}
-    @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+/* ---------- LAYOUT ---------- */
+.flex {
+    display: flex;
+    gap: 30px;
+}
 
-    /* -------------------
-       Responsive
-       ------------------- */
-    @media (max-width:880px){
-      .hero{flex-direction:column;align-items:flex-start;padding:18px}
-      .profile{width:100%}
-      #bgVideo{display:none}
-      #videoFallback{display:block}
-      .video-overlay{display:none}
-    }
-  </style>
+/* ---------- TOGGLE BUTTON ---------- */
+.toggle {
+    position: fixed;
+    top: 20px; right: 20px;
+    padding: 8px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    background: rgba(255,255,255,0.15);
+    color: var(--text-light);
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: 0.3s;
+}
+
+.toggle:hover {
+    background: rgba(255,255,255,0.28);
+}
+
+/* ---------- LIGHT MODE ---------- */
+.light {
+    background: var(--bg-light);
+    color: var(--text-dark);
+}
+
+.light .toggle {
+    color: var(--text-dark);
+    background: rgba(0,0,0,0.1);
+}
+
+.light h1:hover, .light h2:hover {
+    color: #0047ff;
+}
+
+</style>
 </head>
+
 <body>
-  <div class="site">
-    <!-- Background: video (root) + fallback image -->
-    <video id="bgVideo" autoplay muted playsinline loop poster="/bg/sunset.jpg" preload="metadata">
-      <source src="background.mp4" type="video/mp4">
-      <!-- optionally add webm if you upload it -->
-      <!-- <source src="background.webm" type="video/webm"> -->
-    </video>
 
-    <!-- Fallback image element (hidden unless video fails or on mobile) -->
-    <img id="videoFallback" src="/bg/airplane.jpg" alt="" style="display:none;">
+<!-- Background Video -->
+<video autoplay muted loop id="bg-video">
+    <source src="background.mp4" type="video/mp4">
+</video>
 
-    <div class="video-overlay" aria-hidden="true"></div>
+<!-- Light/Dark Mode Toggle -->
+<button class="toggle" onclick="document.body.classList.toggle('light')">☀ / 🌙</button>
 
-    <!-- Page content -->
-    <div class="wrap">
-      <div class="topbar">
-        <div class="brand">Prateek Pachauri — International Relations</div>
-        <div class="controls">
-          <button id="modeToggle" class="btn" aria-pressed="false" title="Toggle dark/light">🌙 Dark</button>
-        </div>
-      </div>
+<div class="container">
+    <h1>Prateek Pachauri — International Relations</h1>
 
-      <header class="hero" id="hero">
-        <div class="intro">
-          <div class="kicker">Portfolio — History & World Politics</div>
-          <h1 id="mainTitle" class="title">History → Political Figures → Diplomacy → Strategy</h1>
-          <p class="lead">I study world politics, strategic thinking and the intersection of history and diplomacy. This portfolio showcases my research, writings and visual work.</p>
-          <p><a class="link" href="https://ijisem.com/journal/index.php/ijisem/search/index?query=Prateek+Pachauri&authors=" target="_blank" rel="noopener">Publications at IJISEM →</a></p>
+    <div class="flex">
+        <div>
+            <h2>History → Political Figures → Diplomacy → Strategy</h2>
+            <p>
+                I study world politics, strategic thinking, and the intersection of history and diplomacy.
+                This portfolio showcases my research, writings, and visual work.
+            </p>
+            <a href="https://ijisem.com/journal/index.php/ijisem/search/index?query=Prateek+Pachauri" target="_blank">
+                Publications at IJISEM →
+            </a>
         </div>
 
-        <aside class="profile" role="region" aria-label="Profile card">
-          <div class="me-wrap" id="meWrap" tabindex="0" aria-label="Profile photo: hover to view gallery">
-            <img id="mePhoto" class="me-photo" src="/me/photo.jpg" alt="Prateek Pachauri — portrait">
-            <div class="gallery" id="gallery" aria-hidden="true">
-              <img data-src="/me/photo1.jpg" alt="photo 1">
-              <img data-src="/me/photo2.jpg" alt="photo 2">
-              <img data-src="/me/photo3.jpg" alt="photo 3">
-            </div>
-            <div class="photo-caption">My photos</div>
-          </div>
-
-          <div style="margin-top:12px">
-            <div style="font-weight:700">Prateek Pachauri</div>
-            <div style="font-size:13px;margin-top:8px">Bachelor degree student — Tomsk State University</div>
-            <div style="font-size:13px;margin-top:8px">Faculty of History & Political Science — International Relations and World Politics</div>
-          </div>
-        </aside>
-      </header>
-
-      <main>
-        <section>
-          <h2>About</h2>
-          <p>I am <strong>Prateek Pachauri</strong>, focused on research and analysis of world politics, historical narratives and diplomatic strategy. I write about public diplomacy, information warfare, and the overlap of psychology and geopolitics.</p>
-        </section>
-
-        <section>
-          <h2>Publications</h2>
-          <div class="cards">
-            <div class="card"><strong>How the Aryan invasion myth was engineered</strong><div style="margin-top:8px;font-size:13px"><a class="link" href="https://ijisem.com/journal/index.php/ijisem/search/index?query=Prateek+Pachauri&authors=" target="_blank">Read</a></div></div>
-
-            <div class="card"><strong>LAOS, VIETNAM, CAMBODIA - THE FREEDOM STRUGGLE OF INDO-CHINA.</strong><div style="margin-top:8px;font-size:13px"><a class="link" href="https://ijisem.com/journal/index.php/ijisem/search/index?query=Prateek+Pachauri&authors=" target="_blank">Read</a></div></div>
-
-            <div class="card"><strong>Majapahit Empire: The Peak of Indonesian Civilization.</strong><div style="margin-top:8px;font-size:13px"><a class="link" href="https://ijisem.com/journal/index.php/ijisem/search/index?query=Prateek+Pachauri&authors=" target="_blank">Read</a></div></div>
-          </div>
-        </section>
-
-        <section>
-          <h2>Contact & Channels</h2>
-          <div class="cards">
-            <div class="card">
-              <strong>MetaSense (Dzen)</strong>
-              <div style="margin-top:8px"><a class="link" href="https://dzen.ru/id/68f25fbb73fc79313a54e920" target="_blank">MetaSense channel</a></div>
-            </div>
-
-            <div class="card">
-              <strong>Contact</strong>
-              <div style="margin-top:8px">Email: <a class="link" href="mailto:arceus1722@gmail.com">arceus1722@gmail.com</a></div>
-              <div style="margin-top:6px">Phone: +79059905464</div>
-              <div style="margin-top:6px">X: <a class="link" href="https://x.com/rusprateek77" target="_blank">@rusprateek77</a></div>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <h2>Visual: strategic preview</h2>
-          <div class="chess-board" id="chessBoard" aria-hidden="true">
-            <div class="board-grid" id="boardGrid"></div>
-          </div>
-        </section>
-      </main>
-
-      <footer style="text-align:center;margin-top:18px;color:rgba(255,255,255,0.7)">&copy; <span id="year"></span> Prateek Pachauri</footer>
+        <div class="photo-card">
+            <img src="me/me.jpeg" class="profile-img">
+            <h3>Prateek Pachauri</h3>
+            <p>
+                Bachelor degree student — Tomsk State University  
+                Faculty of History & Political Science — International Relations and World Politics
+            </p>
+        </div>
     </div>
-  </div>
 
-  <!-- Scripts -->
-  <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    <h2>About</h2>
+    <p>
+        I am focused on research and analysis of world politics, historical narratives and diplomatic strategy.
+        My interests include soft/hard power, Indo-Aryan linguistics, Russian history, information warfare,
+        psychological operations, and modern non-kinetic conflict.
+    </p>
 
-    // Theme toggle & persist
-    const modeToggle = document.getElementById('modeToggle');
-    function applyMode(m){
-      document.body.classList.remove('dark','light');
-      document.body.classList.add(m);
-      modeToggle.textContent = m === 'dark' ? '🌙 Dark' : '☀️ Light';
-      modeToggle.setAttribute('aria-pressed', m === 'dark' ? 'true' : 'false');
-      localStorage.setItem('siteMode', m);
-    }
-    const savedMode = localStorage.getItem('siteMode') || 'dark';
-    applyMode(savedMode);
-    modeToggle.addEventListener('click', ()=> applyMode(document.body.classList.contains('dark') ? 'light' : 'dark'));
+    <h2>My Photography</h2>
+    <div class="flex">
+        <img src="bg/sunset.jpeg" style="width:48%; border-radius:12px;">
+        <img src="bg/airplane.jpeg" style="width:48%; border-radius:12px;">
+    </div>
 
-    // Video autoplay + fallback logic
-    (function(){
-      const v = document.getElementById('bgVideo');
-      const fb = document.getElementById('videoFallback');
-      if(!v) return;
-      // Try to play
-      function tryPlay(){
-        v.play().then(()=> {
-          v.style.opacity = '1';
-          if(fb) fb.style.display = 'none';
-        }).catch(err => {
-          // Play blocked -> show fallback poster image
-          console.warn('Video play failed:', err && err.message ? err.message : err);
-          if(fb) fb.style.display = 'block';
-          v.style.display = 'none';
-        });
-      }
-      // Attempt after short delay
-      setTimeout(tryPlay, 300);
-      document.addEventListener('visibilitychange', ()=> { if(document.visibilityState === 'visible') tryPlay(); });
-    })();
+    <h2>Contact</h2>
+    <p>Email: arceus1722@gmail.com<br>
+       X: @rusprateek77<br>
+       Telegram: Prateek47<br>
+       hh.ru: https://hh.ru/profile/me</p>
+</div>
 
-    // Gallery preload and crossfade on hover
-    (function(){
-      const gallery = document.getElementById('gallery');
-      if(!gallery) return;
-      const imgs = Array.from(gallery.querySelectorAll('img'));
-      imgs.forEach(img=>{
-        const src = img.dataset.src;
-        if(!src) { img.remove(); return; }
-        const i = new Image();
-        i.src = src;
-        i.onload = ()=> img.src = src;
-        i.onerror = ()=> img.remove();
-      });
-
-      const meWrap = document.getElementById('meWrap');
-      let interval=null, index=0;
-      function showNext(){
-        const available = Array.from(gallery.querySelectorAll('img')).filter(x=>x.src);
-        if(available.length === 0) return;
-        available.forEach(i=>i.classList.remove('show'));
-        available[index % available.length].classList.add('show');
-        index++;
-      }
-      function start(){ if(interval) return; showNext(); interval = setInterval(showNext, 2000); }
-      function stop(){ clearInterval(interval); interval=null; gallery.querySelectorAll('img').forEach(i=>i.classList.remove('show')); }
-
-      meWrap.addEventListener('mouseenter', start);
-      meWrap.addEventListener('focus', start);
-      meWrap.addEventListener('mouseleave', stop);
-      meWrap.addEventListener('blur', stop);
-    })();
-
-    // Build a simple chessboard preview and animate pieces
-    (function(){
-      const board = document.getElementById('boardGrid');
-      if(!board) return;
-      const cells = [];
-      for(let r=0;r<8;r++){
-        for(let c=0;c<8;c++){
-          const sq = document.createElement('div'); sq.className='square';
-          const inner = document.createElement('div'); inner.className='square-inner';
-          inner.style.background = ((r+c)%2===0) ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.06)';
-          sq.appendChild(inner);
-          board.appendChild(sq);
-          cells.push(inner);
-        }
-      }
-      let started=false;
-      const obs = new IntersectionObserver(entries=>{
-        entries.forEach(e=>{
-          if(e.isIntersecting && !started){ started=true; startPieces(); }
-        });
-      }, {threshold:0.3});
-      obs.observe(board);
-
-      function startPieces(){
-        const symbols = ['♟','♞','♜','♝','♛'];
-        const pieces = [];
-        for(let i=0;i<5;i++){
-          const p = document.createElement('div'); p.textContent=symbols[i]; p.style.transition='transform .9s cubic-bezier(.2,.9,.2,1)';
-          p.style.fontSize='18px';
-          pieces.push(p);
-          cells[Math.floor(Math.random()*cells.length)].appendChild(p);
-        }
-        setInterval(()=> {
-          pieces.forEach(p=>{
-            const c = cells[Math.floor(Math.random()*cells.length)];
-            c.appendChild(p);
-          });
-        }, 1200);
-      }
-    })();
-  </script>
 </body>
 </html>
